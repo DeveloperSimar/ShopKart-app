@@ -1,0 +1,30 @@
+<!-- views/header.ejs -->
+<header class="bg-white shadow sticky top-0 z-40">
+    <nav class="container mx-auto p-4 flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold text-blue-500">𝓢𝓱𝓸𝓹𝓚𝓪𝓻𝓽</a>
+
+        <!-- Mobile menu button -->
+        <button id="menu-button" class="md:hidden text-blue-500 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden absolute top-4 right-5 flex-col space-y-2 mt-4 z-50">
+            <a href="/shop" class="font-semibold text-blue-500 hover:text-blue-800">Home</a>
+            <a href="/users/cart" class="font-semibold text-blue-500 hover:text-blue-800">Cart</a>
+            <a href="/owner/admin" class="font-semibold text-blue-500 hover:text-blue-800">Admin</a>
+            <a href="/users/profile" class="font-semibold text-blue-500 hover:text-blue-800">My Profile</a>
+            <a href="/logout" class="font-semibold text-red-500 hover:text-red-800">Logout</a>
+        </div>
+
+        <ul class="hidden md:flex space-x-4">
+            <li><a href="/shop" class=" text-blue-500 hover:text-blue-800">Home</a></li>
+            <li><a href="/users/cart" class=" text-blue-500 hover:text-blue-800">Cart</a></li>
+            <li><a href="/owner/admin" class=" text-blue-500 hover:text-blue-800">Admin</a></li>
+            <li><a href="/users/profile" class=" text-blue-500 hover:text-blue-800">My Profile</a></li>
+            <li><a href="/logout" class=" text-red-500 hover:text-red-800">Logout</a></li>
+        </ul>
+    </nav>
+</header>

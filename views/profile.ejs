@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/stylesheets/tailwind.css" rel="stylesheet" />
+</head>
+
+<body class="bg-gray-800 text-white">
+    <%- include('./header') %>
+    <div class="container mx-auto p-4">
+
+        <!-- flash message -->
+      <% if(success.length > 0){ %>
+        <div
+          class="alert text-center bg-green-500 w-full h-16 absolute top-0 z-50 md:w-1/3 md:right-1/2 rounded-b-3xl pt-5 md:translate-x-1/2"
+        >
+          <span class="text-black font-semibold"><%= success %></span>
+        </div>
+        <% } else if(flash.length > 0){ %> 
+          <div
+          class="alert text-center bg-red-500 w-full h-16 absolute top-0 z-50 md:w-1/3 md:right-1/2 rounded-b-3xl pt-5 md:translate-x-1/2"
+        >
+          <span class="text-black font-semibold"><%= flash %></span>
+        </div>
+        <% } %>
+
+
+
+        <div class="max-w-2xl mx-auto bg-gray-900 rounded-lg shadow-md overflow-hidden">
+            <div class="p-6">
+                <div class="flex items-center">
+                    <img class="w-24 h-24 rounded-full mr-4 border-2 border-blue-500" src="https://via.placeholder.com/150" alt="Profile Picture">
+                    <div>
+                        <h1 class="text-3xl font-bold"><%= user.name %></h1>
+                        <p class="text-blue-500">Customer</p>
+                        <p class="text-gray-400"><%= user.email %></p>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <h2 class="text-xl font-semibold text-blue-500">About Me</h2>
+                    <p class="text-gray-300 mt-2"><%= user.about %></p>
+                </div>
+                <div class="mt-6">
+                    <h2 class="text-xl font-semibold text-blue-500">You Cart</h2>
+                    <ul class="list-disc list-inside text-gray-300 mt-2">
+                        <% user.cart.reverse().forEach(product=>{ %>
+                            <li><%= product.name %></li>
+                        <% }) %>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h2 class="text-xl font-semibold text-blue-500">Contact</h2>
+                    <p class="text-gray-300 mt-2">Email: <%= user.email %></p>
+                    <p class="text-gray-300">Phone: <%= user.contact %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./footer') %>
+</body>
+
+</html>

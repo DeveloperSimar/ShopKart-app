@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopKart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/stylesheets/tailwind.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="main">
+
+      <!-- flash message -->
+      <% if(success.length > 0){ %>
+        <div
+          class="alert text-center bg-green-500 w-full h-16 absolute top-0 z-50 md:w-1/3 md:right-1/2 rounded-b-3xl pt-5 md:translate-x-1/2"
+        >
+          <span class="text-black font-semibold"><%= success %></span>
+        </div>
+        <% } else if(flash.length > 0){ %> 
+          <div
+          class="alert text-center bg-red-500 w-full h-16 absolute top-0 z-50 md:w-1/3 md:right-1/2 rounded-b-3xl pt-5 md:translate-x-1/2"
+        >
+          <span class="text-black font-semibold"><%= flash %></span>
+        </div>
+        <% } %>
+
+    <header class="w-screen bg-gray-800">
+      <div class="w-full flex justify-between items-center h-16 bg-gray-800 px-6">
+        <div class="flex items-center">
+          <span class="ml-4 text-xl font-bold text-white">~ShopKart</span>
+        </div>
+        <h3 class="text-white hidden text-2xl md:flex">Your Cart.</h3>
+        <div class="flex items-center gap-5">
+          <a class="text-blue-500" href="/shop">Home</a>
+          <a class="text-blue-500" href="/users/profile">My Account</a>
+        </div>
+      </div>
+      <div class="cart flex justify-center items-center md:hidden">
+        <h2 class="text-white text-2xl">Your Cart</h2>
+      </div>
+    </header>
+
+    <section class="min-h-[70vh] md:flex justify-evenly items-start py-5 px-3 md:px-0">
+
+      <% if(user.cart.length > 0){ %>
+        
+        <div class="bill md:sticky md:top-32 text-xl font-medium border-black border-[1px] p-2 flex flex-col gap-3">
+            <h2 class="text-2xl font-semibold">Price Breakdown</h2>
+            <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold">Total MRP:</span>
+                <span>&#8377;<%= total %></span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold">Discount on MRP:</span>
+                <span>&#8377;<%= discount %></span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold">ShopKart Fee:</span>
+                <span>&#8377;20</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold">Shipping Fee:</span>
+                <span>Free</span>
+            </div>
+  
+            <div class="w-full h-[1px] bg-gray-600"></div>
+  
+            <div class="flex">
+                <h3 class="text-2lg font-bold">Total Amount:</h3>
+                <span class="text-green-500 font-semibold">&#8377; <%= net %></span>
+            </div>
+            <button class="flex justify-center items-center bg-black text-white px-8 py-4 rounded-md">
+                Place Order
+            </button>
+        </div>
+
+        <div class="products  grid grid-cols-2 md:grid-cols-1 md:gap-5 bg-gray-800 md:p-5">
+
+          <% cart.forEach(product =>{ %>
+
+            <div>
+            <div class="product bg-white md:flex items-center border-black border-2 md:h-[40vh] rounded-md">
+                <div class="h-[25vh] md:h-[60%]">
+                    <img
+                        src="data:image/*;base64,<%= product.image.toString('base64') %>"
+                        alt="<%= product.name %>"
+                        class="h-full w-full object-cover overflow-hidden"
+                    />
+                </div>
+                <div class="p-4 flex-wrap">
+                  <h3 class="text-lg font-semibold"><%= product.name %></h3>
+                  <% if(product.discount > 0){ %>
+                    <p class="text-orange-500 text-lg">
+                      Discount: &#8377;<%= product.discount %>
+                    </p>
+                    <% } %>
+                  <span class="text-sm font-semibold">&#8377;<%= Number(product.price) %></span>
+                </div>
+            </div>
+
+            <div class="flex flex-col-reverse md:flex-row justify-between items-center px-5">
+                <a href="/users/cart/remove/<%= product._id %>"><button class="text-red-500 font-semibold">Remove</button></a>
+                <p class="text-orange-500">Net Total: &#8377;<%= Number(product.price) - Number(product.discount) %></p>
+            </div>
+            </div>
+
+          <% }) %>          
+        </div>
+
+
+        <% } else { %>
+            <h1 class="animate-bounce absolute bottom-1/2 text-center text-3xl font-semibold">Your cart is empty.</h1>
+            <a class="text-2xl font-semibold absolute bottom-[45%] text-white px-2 bg-blue-500 rounded-md" href="/shop">Shop Now</a>
+        <% } %>
+    </section>
+
+
+    <%- include('./footer.ejs') %>
+    </div>
+
+    <script src="/js/common.js"></script>
+  </body>
+</html>

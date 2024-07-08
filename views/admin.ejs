@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products | ShopKart</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/tailwind.css" />
+  </head>
+  <body>
+    <div class="main w-full min-h-screen">
+
+      <% if(flash.length > 0){ %>
+        <div class="alert text-center bg-orange-400 w-full h-16 absolute top-0 z-50 md:w-1/3 md:right-1/2 md:translate-x-1/2 rounded-b-3xl pt-5">
+            <span class="text-black font-semibold "><%= flash %></span>
+        </div>
+    <% } %>
+        
+      <section class="min-h-screen w-full flex flex-col md:flex-row">
+
+        <aside
+          class="bg-gray-800 text-white w-full md:w-[25vw] md:h-screen p-4 overflow-hidden sticky top-0 z-10"
+        >
+          <h2 class="text-2xl font-bold mb-4">Admin Panel</h2>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="/shop"
+                class="block py-2 px-4 rounded hover:bg-gray-700 text-blue-500"
+                >𝓢𝓱𝓸𝓹𝓚𝓪𝓻𝓽</a
+              >
+              <ul class="pl-4 space-y-1">
+                <li>
+                  <a href="/shop" class="block py-1 px-2 rounded hover:bg-gray-700"
+                    >All Products</a
+                  >
+                </li>
+                <li>
+                  <a href="/owner/admin" class="block py-1 px-2 rounded hover:bg-gray-700"
+                    >Add New Product</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </aside>
+
+        <div class="content md:m-5 md:p-20 w-full md:w-[75vw] flex flex-col gap-5">
+            <h2 class="text-3xl text-blue-500 font-semibold">Create New Product~</h2>
+            <form action="/products/create" method="post" enctype="multipart/form-data" class="border-black border-2 md:p-5 p-2">
+                <h3 class="text-xl mb-5">Product Details</h3>
+                <label for="image">Product Image</label>
+                <input class="mb-10 text-blue-500" type="file" id="image" name="image" accept="image/*" required />
+                
+                <input class="outline-none border-black border-[1px] text-blue-500 font-medium mb-5 px-2 *: rounded bg-gray-800" type="text" placeholder="Product Name" name="name" required />
+                
+                <input class="outline-none border-black border-[1px] text-blue-500 font-medium mb-5 px-2 bg-gray-800 rounded" type="number" placeholder="Product Price" name="price" required />
+
+                <input class="outline-none border-black border-[1px] text-blue-500 font-medium mb-5 px-2 bg-gray-800 rounded" type="number" placeholder="Discount Price" name="discount" value=0 />
+
+                <select class="border-black border-2" name="is_avail">
+                  <option value="true">Available</option>
+                  <option value="false">Not Available</option>
+                </select>
+
+                <div class="flex flex-col">
+                <label for="description">Product Description</label>
+                <textarea class="outline-none border-black border-[1px] text-blue-500 font-medium mb-5 px-2 bg-gray-800" placeholder="Enter Description Here.." id="description" name="description" required></textarea>
+                </div>
+
+                <div class="color-details">
+                    <h2>Panel Details:</h2>
+                    <input class="outline-none border-black border-[1px] text-blue-500 font-medium mb-5 px-2 bg-gray-800 rounded" type="text" placeholder="Panel Color" name="panelcolor" required />
+                    <input class="outline-none border-black border-[1px] text-blue-500 font-medium mb-5 px-2 bg-gray-800 rounded" type="text" placeholder="Text Color" name="textcolor" required />
+                </div>
+
+                <button class="bg-blue-500 px-2 py-1 text-xl rounded-lg" type="submit">Create Product</button>
+            </form>
+        </div>
+
+      </section>
+
+      <%- include('./footer') %>
+    </div>
+
+    <script src="/js/common.js"></script>
+  </body>
+</html>
